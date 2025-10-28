@@ -45,6 +45,8 @@ npm install
 
 ## Usage
 
+expose SSE endpoints
+
 ### Command Line Arguments
 
 ```bash
@@ -93,6 +95,23 @@ To use this proxy with an MCP client like Claude Desktop, add the following to y
       ]
     }
   }
+}
+```
+
+or using npx
+
+```json
+"mcpServers": {
+   "my-server": {
+      "command": "npx",
+      "args": [
+         "-y",
+         "stdio-to-streaming-http-mcp",
+         "your server name",
+         "https://your-remote-server.com/mcp",
+         "your-api-key"
+      ]
+   }
 }
 ```
 
