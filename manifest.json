@@ -1,6 +1,6 @@
 {
     "dxt_version": "0.1",
-    "name": "stdio-to-sse-mcp",
+    "name": "stdio-to-streaming-http-mcp",
     "display_name": "My MCP Server",
     "version": "0.1.0",
     "description": "MCP server that proxies STDIO to SSE",
@@ -24,7 +24,7 @@
         "args": [
           "${__dirname}/server/index.js",
           "${user_config.server_name}",
-          "${user_config.sse_url}",
+          "${user_config.streaming_http_url}",
           "${user_config.api_key}"
         ]
       }
@@ -45,10 +45,10 @@
         "sensitive": false,
         "required": true
       },
-      "sse_url": {
+      "streaming_http_url": {
         "type": "string",
-        "title": "SSE Server URL",
-        "description": "The URL of the SSE endpoint to proxy to",
+        "title": "Streaming HTTP Server URL",
+        "description": "The URL of the streaming HTTP endpoint to proxy to",
         "sensitive": false,
         "required": true
       },

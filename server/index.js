@@ -338,7 +338,7 @@ async function main() {
   console.error(
     `Environment variables - SERVER_NAME: ${
       process.env.SERVER_NAME
-    }, SSE_URL: ${process.env.SSE_URL}, API_KEY: ${
+    }, STREAMIN_HTTP_URL: ${process.env.STREAMIN_HTTP_URL}, API_KEY: ${
       process.env.API_KEY ? "[SET]" : "[NOT SET]"
     }`
   );
@@ -346,7 +346,7 @@ async function main() {
   // Default StreamingHTTP URL - can be overridden via environment variable or command line
   const serverName =
     process.env.SERVER_NAME || process.argv[2] || "My MCP Server";
-  const streamingHTTPUrl = process.env.SSE_URL || process.argv[3];
+  const streamingHTTPUrl = process.env.STREAMIN_HTTP_URL || process.argv[3];
   const apiKey = process.env.API_KEY || process.argv[4];
 
   console.error(`Resolved server name: "${serverName}"`);
@@ -354,9 +354,11 @@ async function main() {
   console.error(`Resolved API key: ${apiKey ? "[SET]" : "[NOT SET]"}`);
 
   if (!streamingHTTPUrl) {
-    console.error(`Usage: node server.js <SERVER_NAME> <SSE_URL> [API_KEY]`);
     console.error(
-      `   or: SERVER_NAME=<name> SSE_URL=<url> API_KEY=<key> node server.js`
+      `Usage: node server.js <SERVER_NAME> <STREAMIN_HTTP_URL> [API_KEY]`
+    );
+    console.error(
+      `   or: SERVER_NAME=<name> STREAMIN_HTTP_URL=<url> API_KEY=<key> node server.js`
     );
     console.error(
       `Example: node server.js "STDIO to StreamingHTTP Proxy MCP Server" https://example.com/api/sse your-api-key`

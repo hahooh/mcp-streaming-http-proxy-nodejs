@@ -1,12 +1,13 @@
-# MCP SSE Proxy
+# MCP Streaming HTTP Proxy
 
-A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with SSE (Server-Sent Events) based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use SSE transport.
+A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with streaming http based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use SSE transport.
 
 ## Overview
 
-The MCP SSE Proxy creates a bridge between two different MCP transport protocols:
+The MCP Streaming HTTP Proxy creates a bridge between two different MCP transport protocols:
+
 - **STDIO Transport**: Used by local MCP clients (like Claude Desktop)
-- **SSE Transport**: Used by remote MCP servers accessible via HTTP/HTTPS
+- **Streaming HTTP Transport**: Used by remote MCP servers accessible via HTTP/HTTPS
 
 This proxy allows you to use remote MCP servers that expose SSE endpoints from applications that only support STDIO-based MCP connections.
 
@@ -43,17 +44,19 @@ npm install
 ### Command Line Arguments
 
 ```bash
-node server/index.js <SERVER_NAME> <SSE_URL> [API_KEY]
+node server/index.js <SERVER_NAME> <STREAMING_HTTP_URL> [API_KEY]
 ```
 
 **Parameters:**
+
 - `SERVER_NAME`: Display name for the MCP server
-- `SSE_URL`: URL of the remote SSE MCP server endpoint
+- `STREAMING_HTTP_URL`: URL of the remote streaming HTTP MCP server endpoint
 - `API_KEY`: (Optional) API key for authentication
 
 **Example:**
+
 ```bash
-node server/index.js "My Remote MCP Server" "https://api.example.com/mcp/sse" "your-api-key"
+node server/index.js "My Remote MCP Server" "https://api.example.com/mcp" "your-api-key"
 ```
 
 ### Environment Variables
@@ -62,7 +65,7 @@ Alternatively, you can use environment variables:
 
 ```bash
 export SERVER_NAME="My Remote MCP Server"
-export SSE_URL="https://api.example.com/mcp/sse"
+export STREAMING_HTTP_URL="https://api.example.com/mcp"
 export API_KEY="your-api-key"
 node server/index.js
 ```
@@ -81,7 +84,7 @@ To use this proxy with an MCP client like Claude Desktop, add the following to y
       "args": [
         "/path/to/mcp-proxy-node/server/index.js",
         "Remote Server Name",
-        "https://your-remote-server.com/mcp/sse",
+        "https://your-remote-server.com/mcp",
         "your-api-key"
       ]
     }
@@ -92,6 +95,7 @@ To use this proxy with an MCP client like Claude Desktop, add the following to y
 ### Authentication
 
 The proxy supports Bearer token authentication. When an API key is provided, it will be sent as:
+
 - `Authorization: Bearer <API_KEY>` header in HTTP requests
 - Authentication headers for EventSource connections
 
@@ -118,18 +122,21 @@ npm install -g @anthropic-ai/dxt
 ### Steps to Create DXT File
 
 1. **Initialize DXT configuration** (if needed):
+
    ```bash
    dxt init
    ```
-   
+
    Note: This project already includes a `manifest.json` file, so initialization may not be necessary.
 
 2. **Validate the manifest**:
+
    ```bash
    dxt validate
    ```
 
 3. **Package the extension**:
+
    ```bash
    dxt pack
    ```
@@ -143,19 +150,12 @@ npm install -g @anthropic-ai/dxt
 
 If you don't want to build the extension yourself, you can directly drag and drop the pre-built `mcp-proxy-node.dxt` file into Claude Desktop's Settings window for immediate installation.
 
-### Screenshots
-
-![MCP SSE Proxy Installation](screenshot.png)
-
-*The MCP SSE Proxy extension as it appears in Claude Desktop after installation. Users can easily configure the server name, SSE URL, and API key through the intuitive interface.*
-
-
 ## Technical Details
 
 ### Architecture
 
 ```
-MCP Client (STDIO) ←→ MCP SSE Proxy ←→ Remote MCP Server (SSE)
+MCP Client (STDIO) ←→ MCP Streaming HTTP Proxy ←→ Remote MCP Server (Streaming HTTP)
 ```
 
 The proxy consists of two main components:
@@ -166,11 +166,12 @@ The proxy consists of two main components:
 ### Transport Protocols
 
 - **Input**: STDIO transport (standard input/output)
-- **Output**: SSE transport (Server-Sent Events over HTTP/HTTPS)
+- **Output**: Streaming HTTP transport
 
 ### Error Handling
 
 The proxy includes comprehensive error handling:
+
 - Connection failures to remote SSE servers
 - Invalid URL formats
 - Authentication errors
@@ -180,6 +181,7 @@ The proxy includes comprehensive error handling:
 ### Logging
 
 Detailed logging is provided via `console.error()` for debugging:
+
 - Connection status
 - Request/response details
 - Error information with stack traces
@@ -187,14 +189,15 @@ Detailed logging is provided via `console.error()` for debugging:
 
 ## API Reference
 
-### MCPSSEProxy Class
+### MCPStreamingHTTPProxy Class
 
 #### Constructor
+
 ```javascript
-new MCPSSEProxy(sseUrl, apiKey, serverName)
+new MCPStreamingHTTPProxy(streamingHTTPUrl, apiKey, serverName);
 ```
 
-- `sseUrl` (string): URL of the SSE MCP server
+- `streamingHTTPUrl` (string): URL of the streaming http MCP server
 - `apiKey` (string, optional): API key for authentication
 - `serverName` (string): Display name for the proxy server
 
@@ -236,16 +239,19 @@ mcp-proxy-node/
 ### Common Issues
 
 1. **Connection Refused**
+
    - Verify the SSE URL is correct and accessible
    - Check if the remote server is running
    - Ensure firewall/network settings allow connections
 
 2. **Authentication Errors**
+
    - Verify the API key is correct
    - Check if the remote server expects authentication
    - Ensure the API key format matches server expectations
 
 3. **No Tools/Resources Available**
+
    - Check if the remote server actually provides tools/resources
    - Verify the remote server is responding correctly
    - Check proxy logs for error messages
@@ -258,6 +264,7 @@ mcp-proxy-node/
 ### Debugging
 
 Enable detailed logging by examining the console output. The proxy logs:
+
 - Connection attempts and results
 - Request/response details
 - Error messages with stack traces
@@ -279,6 +286,7 @@ MIT License - see LICENSE file for details
 ## Support
 
 For issues and questions:
+
 - Check the troubleshooting section above
 - Review the console logs for error details
 - Ensure your Node.js version meets requirements (>= 18.0.0)
@@ -289,6 +297,6 @@ For issues and questions:
 - **Node.js**: >= 18.0.0
 - **MCP Protocol**: Compatible with MCP SDK v1.13.2+
 - **Platforms**: macOS, Windows, Linux
-- **Claude Desktop**: >= 0.10.0 
+- **Claude Desktop**: >= 0.10.0
 
 **Made with ❤️ for the MCP community**

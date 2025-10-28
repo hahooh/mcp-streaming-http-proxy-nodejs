@@ -5,8 +5,8 @@
   "main": "server/index.js",
   "type": "module",
   "scripts": {
-    "start": "node server/index.js server_name sse_url api_key",
-    "dev": "node server/index.js server_name sse_url api_key"
+    "start": "node server/index.js server_name streaming_http_url api_key",
+    "dev": "node server/index.js server_name streaming_http_url api_key"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.13.2"
