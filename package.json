@@ -1,7 +1,7 @@
 {
-  "name": "stdio-to-sse-mcp",
+  "name": "stdio-to-streaming-http-mcp",
   "version": "1.0.0",
-  "description": "MCP server that proxies STDIO to SSE",
+  "description": "MCP server that proxies STDIO to Streaming HTTP",
   "main": "server/index.js",
   "type": "module",
   "scripts": {
@@ -16,11 +16,14 @@
   },
   "keywords": [
     "mcp",
-    "sse",
+    "streaming http",
     "stdio",
     "proxy",
     "modelcontextprotocol"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "streaming-http-proxy": "./server/index.js"
+  }
 }

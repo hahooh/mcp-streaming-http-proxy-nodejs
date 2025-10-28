@@ -13,7 +13,7 @@ The MCP Streaming HTTP Proxy creates a bridge between two different MCP transpor
 - **STDIO Transport**: Used by local MCP clients (like Claude Desktop)
 - **Streaming HTTP Transport**: Used by remote MCP servers accessible via HTTP/HTTPS
 
-This proxy allows you to use remote MCP servers that expose SSE endpoints from applications that only support STDIO-based MCP connections.
+This proxy allows you to use remote MCP servers that expose Streaming HTTP endpoints from applications that only support STDIO-based MCP connections.
 
 ## Features
 
