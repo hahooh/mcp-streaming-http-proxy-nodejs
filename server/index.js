@@ -62,7 +62,7 @@ class MCPStreamingHTTPProxy {
     if (this.apiKey) {
       transportOptions.requestInit = {
         headers: {
-          "X-API-KEY": `Bearer ${this.apiKey}`,
+          "X-API-KEY": `${this.apiKey}`,
         },
       };
       console.error(`Using API key authentication`);
@@ -346,7 +346,7 @@ async function main() {
   // Default StreamingHTTP URL - can be overridden via environment variable or command line
   const serverName =
     process.env.SERVER_NAME || process.argv[2] || "My MCP Server";
-  const streamingHTTPUrl = process.env.STREAMIN_HTTP_URL || process.argv[3];
+  const streamingHTTPUrl = process.env.STREAMING_HTTP_URL || process.argv[3];
   const apiKey = process.env.API_KEY || process.argv[4];
 
   console.error(`Resolved server name: "${serverName}"`);
