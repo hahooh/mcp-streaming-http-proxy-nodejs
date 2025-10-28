@@ -1,3 +1,7 @@
+# It is a tweak of https://github.com/gomarble-ai/mcp-proxy-nodejs!
+
+Which is an SSE proxy
+
 # MCP Streaming HTTP Proxy
 
 A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with streaming http based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use SSE transport.
