@@ -1,6 +1,6 @@
 {
   "name": "stdio-to-streaming-http-mcp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MCP server that proxies STDIO to Streaming HTTP",
   "main": "server/index.js",
   "type": "module",
