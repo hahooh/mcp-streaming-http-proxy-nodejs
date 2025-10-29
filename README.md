@@ -2,6 +2,10 @@
 
 Which is an SSE proxy
 
+# Github page
+
+https://github.com/hahooh/mcp-streaming-http-proxy-nodejs
+
 # MCP Streaming HTTP Proxy
 
 A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with streaming http based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use SSE transport.
@@ -221,7 +225,7 @@ new MCPStreamingHTTPProxy(streamingHTTPUrl, apiKey, serverName);
 ```
 
 - `streamingHTTPUrl` (string): URL of the streaming http MCP server
-- `apiKey` (string, optional): API key for authentication
+- `apiKey` (string, optional): API key for authentication. In header X-API-KEY.
 - `serverName` (string): Display name for the proxy server
 
 #### Methods
