@@ -2,13 +2,17 @@
 
 Which is an SSE proxy
 
+# This is a part of MCPfy project
+
+https://www.hahooh.xyz
+
 # Github page
 
 https://github.com/hahooh/mcp-streaming-http-proxy-nodejs
 
 # MCP Streaming HTTP Proxy
 
-A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with streaming http based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use SSE transport.
+A Model Context Protocol (MCP) server that acts as a proxy, bridging STDIO-based MCP clients with streaming http based MCP servers. This enables MCP clients that only support STDIO transport to connect to remote MCP servers that use streaming http transport.
 
 ## Overview
 
@@ -26,7 +30,7 @@ This proxy allows you to use remote MCP servers that expose Streaming HTTP endpo
   - Resources (listing and reading)
   - Resource Templates (listing)
   - Prompts (listing and getting)
-- **Authentication Support**: Optional API key authentication for SSE endpoints
+- **Authentication Support**: Optional API key authentication for streaming http endpoints
 - **Error Handling**: Comprehensive error handling with detailed logging
 - **Graceful Shutdown**: Proper cleanup on process termination
 - **Configurable**: Flexible configuration via command line arguments or environment variables
@@ -49,7 +53,7 @@ npm install
 
 ## Usage
 
-expose SSE endpoints
+expose streaming http endpoints
 
 ### Command Line Arguments
 
@@ -188,7 +192,7 @@ MCP Client (STDIO) ←→ MCP Streaming HTTP Proxy ←→ Remote MCP Server (Str
 The proxy consists of two main components:
 
 1. **MCP Server**: Accepts STDIO connections from local MCP clients
-2. **MCP Client**: Connects to remote SSE MCP servers
+2. **MCP Client**: Connects to remote streaming http MCP servers
 
 ### Transport Protocols
 
@@ -199,7 +203,7 @@ The proxy consists of two main components:
 
 The proxy includes comprehensive error handling:
 
-- Connection failures to remote SSE servers
+- Connection failures to remote streaming http servers
 - Invalid URL formats
 - Authentication errors
 - Request/response parsing errors
@@ -267,7 +271,7 @@ mcp-proxy-node/
 
 1. **Connection Refused**
 
-   - Verify the SSE URL is correct and accessible
+   - Verify the streaming http URL is correct and accessible
    - Check if the remote server is running
    - Ensure firewall/network settings allow connections
 
@@ -317,7 +321,7 @@ For issues and questions:
 - Check the troubleshooting section above
 - Review the console logs for error details
 - Ensure your Node.js version meets requirements (>= 18.0.0)
-- Verify the remote SSE server is compatible with MCP protocol
+- Verify the remote streaming http server is compatible with MCP protocol
 
 ## Compatibility
 
